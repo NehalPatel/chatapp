@@ -1,0 +1,25 @@
+{
+  "name": "whatsapp",
+  "version": "1.0.0",
+  "description": "Whatsapp application clone demonstration",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nehal Patel",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "socket.io": "^1.7.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "debug": "^2.2.0",
+    "gulp": "^3.9.0",
+    "gulp-ruby-sass": "^2.0.1",
+    "gulp-nodemon": "^2.0.2",
+    "gulp-livereload": "^3.8.0",
+    "gulp-plumber": "^1.0.0"
+  }
+}
