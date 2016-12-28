@@ -11,14 +11,19 @@ io.on('connection', function(socket){
   
   socket.on('disconnect', function(){
     console.log('user disconnected');
+    socket.broadcast.emit('newclientconnect',{ description: 'a client left the room'})
   });
 
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
+  socket.on('message', function(msg){
+    io.emit('message', msg);
   });
 
-  socket.broadcast.emit('hi');
+  //this event will be emit to the newly connected client ( .on('connection') )
+  socket.emit('newclientconnect',{ description: 'Hey, welcome!'});
 
+  //this event will broadcast the event to all other sockets except newly connected client
+  socket.broadcast.emit('newclientconnect',{ description: 'new client connected!'});
+ 
 });
 
 http.listen(3000, function(){
