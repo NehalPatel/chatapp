@@ -1,6 +1,9 @@
 var app = require('express')();
+var express = require("express");
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+
+app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
@@ -26,6 +29,8 @@ io.on('connection', function(socket){
       //this event will broadcast the event to all other sockets except newly connected client
       socket.broadcast.emit('newUser', socket.username + ' join room');
 
+      io.emit('updatepool', users);
+
     } else {
       console.log(data + ' username is taken! Try some other username.');
       socket.emit('userExists', data + ' username is taken! Try some other username.');
@@ -42,6 +47,7 @@ io.on('connection', function(socket){
       console.log(socket.username + " removed from chat");
     }
     socket.broadcast.emit('message',{ message: socket.username + ' left the room'});
+    io.emit('updatepool', users);
   });
 
   socket.on('message', function(msg){
